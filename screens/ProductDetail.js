@@ -11,7 +11,7 @@ import {
 import Feather from "react-native-vector-icons/Feather";
 import { products } from "../db/products";
 
-export default function ProductDetail({ route }) {
+export default function ProductDetail({ route, navigation }) {
   const [qty, setQty] = useState(1);
   const [productDetail, setProductDetail] = useState(null);
 
@@ -33,6 +33,12 @@ export default function ProductDetail({ route }) {
       <ScrollView style={{ flex: 1 }} showsVerticalScrollIndicator={false}>
         <View style={styles.head}>
           <Image source={productDetail?.image} style={styles.image} />
+          <TouchableOpacity
+            style={styles.backBtn}
+            onPress={() => navigation.goBack()}
+          >
+            <Feather name="arrow-left" size={24} />
+          </TouchableOpacity>
         </View>
         <View style={styles.content}>
           <Text style={styles.title}>{productDetail?.name}</Text>
@@ -81,6 +87,17 @@ const styles = StyleSheet.create({
   head: {
     backgroundColor: "#e2e2e2",
   },
+  backBtn: {
+    position: "absolute",
+    top: 12,
+    left: 22,
+    backgroundColor: "#fff",
+    height: 40,
+    width: 40,
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   image: {
     height: 220,
   },
@@ -107,7 +124,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
   },
   counter: {
-    backgroundColor: "#ddd",
+    backgroundColor: "#e2e2e2",
     flexDirection: "row",
     borderRadius: 20,
   },
@@ -140,7 +157,7 @@ const styles = StyleSheet.create({
     color: "#333",
   },
   footer: {
-    height: 68,
+    height: 72,
     borderTopWidth: 1,
     borderTopColor: "#ddd",
     justifyContent: "center",
@@ -148,7 +165,7 @@ const styles = StyleSheet.create({
   },
   cartBtn: {
     backgroundColor: "#000",
-    height: 45,
+    height: 48,
     borderRadius: 25,
     alignContent: "center",
     justifyContent: "center",

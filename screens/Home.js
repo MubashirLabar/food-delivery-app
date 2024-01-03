@@ -5,14 +5,18 @@ import {
   View,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
+import { useState } from "react";
 import Feather from "react-native-vector-icons/Feather";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import ProductCard from "../components/ProductCard";
 import { products } from "../db/products";
 
-function Home() {
+function Home({ navigation }) {
+  const [searchInput, setSearchInput] = useState("");
+
   const categories = [
     {
       label: "Fast Food",
@@ -48,8 +52,18 @@ function Home() {
           <TextInput
             placeholder="Search your products"
             style={styles.searchInput}
+            value={searchInput}
+            onChangeText={(value) => setSearchInput(value)}
           />
-          <Feather name="search" size={24} />
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate("products", {
+                searchInput: searchInput,
+              })
+            }
+          >
+            <Feather name="search" size={24} />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.categoriesBlock}>
@@ -91,7 +105,7 @@ const styles = StyleSheet.create({
   },
   header: {
     backgroundColor: "#fff",
-    paddingTop: 40,
+    paddingTop: 30,
     paddingHorizontal: 20,
     paddingBottom: 20,
     marginBottom: 10,
@@ -99,10 +113,10 @@ const styles = StyleSheet.create({
   headTitle: {
     fontSize: 24,
     fontFamily: "Bold",
-    marginBottom: 10,
+    marginBottom: 12,
   },
   searchField: {
-    backgroundColor: "#ddd",
+    backgroundColor: "#e2e2e2",
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
@@ -111,7 +125,7 @@ const styles = StyleSheet.create({
   searchInput: {
     fontSize: 15,
     fontFamily: "Regular",
-    paddingVertical: 9,
+    paddingVertical: 10,
     flex: 1,
   },
   categoriesBlock: {
@@ -132,7 +146,7 @@ const styles = StyleSheet.create({
   cataIcon: {
     height: 54,
     width: 54,
-    backgroundColor: "#ddd",
+    backgroundColor: "#e2e2e2",
     borderRadius: 50,
     marginBottom: 5,
     alignItems: "center",
@@ -145,7 +159,7 @@ const styles = StyleSheet.create({
   topProducts: {
     backgroundColor: "#fff",
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingTop: 20,
     flex: 1,
   },
 });

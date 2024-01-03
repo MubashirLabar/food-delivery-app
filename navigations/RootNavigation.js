@@ -35,7 +35,7 @@ export default function RootNavigation() {
           name="products"
           component={Products}
           options={{
-            tabBarLabel: "Orders",
+            tabBarLabel: "Products",
             tabBarIcon: ({ color, size }) => (
               <Icon name="clipboard" color={color} size={size} />
             ),
